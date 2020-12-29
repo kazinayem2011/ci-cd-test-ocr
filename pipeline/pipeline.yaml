@@ -18,18 +18,18 @@ Parameters:
     GithubRepo:
       Description: Gitub Repository name
       Type: AWS::SSM::Parameter::Value<String>
-      Default: /service/aws-sam-ocr-pipeline/github/repo
+      Default: ocr-pipeline-github-repo
 
     GithubToken:
       Description: Github OAuth Token with full permissions on admin:repo_hook and repo
       Type: AWS::SSM::Parameter::Value<String>
       NoEcho: true
-      Default: /service/aws-sam-ocr-pipeline/github/token
+      Default: ocr-pipeline-github-token
 
     GithubUser:
       Description: Github user where the repository lives
       Type: AWS::SSM::Parameter::Value<String>
-      Default: /service/aws-sam-ocr-pipeline/github/user
+      Default: ocr-pipeline-github-user
 
 
 Resources:
