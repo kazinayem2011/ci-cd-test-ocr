@@ -56,7 +56,7 @@ Resources:
               Value: !Ref AWS::StackName
             -
               Key: "Project"
-              Value: aws-sam-ocr-pipeline
+              Value: ocr-pipeline
         DeletionPolicy: Retain
         UpdateReplacePolicy: Retain
 
@@ -71,8 +71,8 @@ Resources:
     CodeBuildProject:
         Type: AWS::CodeBuild::Project
         Properties:
-            Name: aws-sam-ocr-pipeline
-            Description: Build project for the aws-sam-ocr-pipeline
+            Name: ocr-pipeline
+            Description: Build project for the ocr-pipeline
             Artifacts:
               Type: CODEPIPELINE
             Environment: 
@@ -95,7 +95,7 @@ Resources:
                 Value: !Ref AWS::StackName
               -
                 Key: "Project"
-                Value: aws-sam-ocr-pipeline
+                Value: ocr-pipeline
 
 ########  #### ########  ######## ##       #### ##    ## ######## 
 ##     ##  ##  ##     ## ##       ##        ##  ###   ## ##       
@@ -111,7 +111,7 @@ Resources:
             ArtifactStore: 
                 Location: !Ref BuildArtifactsBucket
                 Type: S3
-            Name: aws-sam-ocr-pipeline
+            Name: ocr-pipeline
             RoleArn: !GetAtt CodePipelineExecutionRole.Arn
             Stages:
                 - Name: Source
@@ -157,8 +157,8 @@ Resources:
                       # More info on Possible Values for Cloudformation: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html#w2ab2c13c13b9
                         ActionMode: CHANGE_SET_REPLACE
                         RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                        StackName: aws-sam-ocr-pipeline-Beta
-                        ChangeSetName: aws-sam-ocr-pipeline-ChangeSet-Beta
+                        StackName: ocr-pipeline-Beta
+                        ChangeSetName: ocr-pipeline-ChangeSet-Beta
                         TemplatePath: BuildArtifactAsZip::packaged.yaml
                         Capabilities: CAPABILITY_IAM
                       InputArtifacts:
@@ -173,10 +173,10 @@ Resources:
                       Configuration:
                         ActionMode: CHANGE_SET_EXECUTE
                         RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                        StackName: aws-sam-ocr-pipeline-Beta
-                        ChangeSetName: aws-sam-ocr-pipeline-ChangeSet-Beta
+                        StackName: ocr-pipeline-Beta
+                        ChangeSetName: ocr-pipeline-ChangeSet-Beta
                       OutputArtifacts:
-                        - Name: aws-sam-ocr-pipelineBetaChangeSet
+                        - Name: ocr-pipelineBetaChangeSet
                       RunOrder: 2
                 - Name: Gamma
                   Actions:
@@ -189,8 +189,8 @@ Resources:
                       Configuration:
                         ActionMode: CHANGE_SET_REPLACE
                         RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                        StackName: aws-sam-ocr-pipeline-Gamma
-                        ChangeSetName: aws-sam-ocr-pipeline-ChangeSet-Gamma
+                        StackName: ocr-pipeline-Gamma
+                        ChangeSetName: ocr-pipeline-ChangeSet-Gamma
                         TemplatePath: BuildArtifactAsZip::packaged.yaml
                         Capabilities: CAPABILITY_IAM
                       InputArtifacts:
@@ -205,10 +205,10 @@ Resources:
                       Configuration:
                         ActionMode: CHANGE_SET_EXECUTE
                         RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                        StackName: aws-sam-ocr-pipeline-Gamma
-                        ChangeSetName: aws-sam-ocr-pipeline-ChangeSet-Gamma
+                        StackName: ocr-pipeline-Gamma
+                        ChangeSetName: ocr-pipeline-ChangeSet-Gamma
                       OutputArtifacts:
-                        - Name: aws-sam-ocr-pipelineGammaChangeSet
+                        - Name: ocr-pipelineGammaChangeSet
                       RunOrder: 2
                 - Name: Prod
                   Actions:
@@ -228,8 +228,8 @@ Resources:
                       Configuration:
                         ActionMode: CHANGE_SET_REPLACE
                         RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                        StackName: aws-sam-ocr-pipeline-Prod
-                        ChangeSetName: aws-sam-ocr-pipeline-ChangeSet-Prod
+                        StackName: ocr-pipeline-Prod
+                        ChangeSetName: ocr-pipeline-ChangeSet-Prod
                         TemplatePath: BuildArtifactAsZip::packaged.yaml
                         Capabilities: CAPABILITY_IAM
                       InputArtifacts:
@@ -244,10 +244,10 @@ Resources:
                       Configuration:
                         ActionMode: CHANGE_SET_EXECUTE
                         RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                        StackName: aws-sam-ocr-pipeline-Prod
-                        ChangeSetName: aws-sam-ocr-pipeline-ChangeSet-Prod
+                        StackName: ocr-pipeline-Prod
+                        ChangeSetName: ocr-pipeline-ChangeSet-Prod
                       OutputArtifacts:
-                        - Name: aws-sam-ocr-pipelineProdChangeSet
+                        - Name: ocr-pipelineProdChangeSet
                       RunOrder: 3
 
 
@@ -284,8 +284,8 @@ Resources:
                           - 'logs:CreateLogStream'
                           - 'logs:PutLogEvents'
                         Resource:
-                          - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/aws-sam-ocr-pipeline'
-                          - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/aws-sam-ocr-pipeline:*'
+                          - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/ocr-pipeline'
+                          - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/ocr-pipeline:*'
                 - PolicyName: CodeBuildArtifactsBucket
                   PolicyDocument:
                     Version: '2012-10-17'
@@ -384,7 +384,7 @@ Resources:
                           - 'cloudformation:SetStackPolicy'
                           - 'cloudformation:ValidateTemplate'
                         Resource: 
-                          - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/aws-sam-ocr-pipeline*/*'
+                          - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/ocr-pipeline*/*'
                           - !Sub 'arn:aws:cloudformation:${AWS::Region}:aws:transform/Serverless-2016-10-31'
 
 

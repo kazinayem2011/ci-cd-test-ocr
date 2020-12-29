@@ -90,7 +90,7 @@ Run the following AWS CLI command to create your first pipeline for your SAM bas
 
 ```bash
 aws cloudformation create-stack \
-    --stack-name aws-sam-ocr-pipeline-pipeline \
+    --stack-name ocr-pipeline \
     --template-body file://pipeline.yaml \
     --capabilities CAPABILITY_NAMED_IAM
 ```
