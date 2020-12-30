@@ -1,4 +1,4 @@
-# aws-sam-ocr-pipeline
+# ci-cd-ocr-pipeline
 
 **This is an example of how to create a minimal pipeline for SAM based Serverless Apps**
 
@@ -36,7 +36,7 @@ aws ssm put-parameter \
     --value "GITHUB USER"
 ```
 
-**NOTE:** Keep in mind that these Parameters will only be available within the same region you're deploying this Pipeline stack. Also, if these values ever change you will need to [update these parameters](https://docs.aws.amazon.com/cli/latest/reference/ssm/put-parameter.html) as well as update the "aws-sam-ocr-pipeline-pipeline" Cloudformation stack.
+**NOTE:** Keep in mind that these Parameters will only be available within the same region you're deploying this Pipeline stack. Also, if these values ever change you will need to [update these parameters](https://docs.aws.amazon.com/cli/latest/reference/ssm/put-parameter.html) as well as update the "ocr-pipeline-stack" Cloudformation stack.
 
 ## Pipeline creation
 
@@ -86,7 +86,7 @@ Before we create this 3-environment Pipeline through Cloudformation you may want
 ```
 </details>
 
-Run the following AWS CLI command to create your first pipeline for your SAM based Serverless App:
+Run the following AWS CLI command from pipeline folder to create your first pipeline for your SAM based Serverless App:
 
 ```bash
 aws cloudformation create-stack \
@@ -99,7 +99,7 @@ This may take a couple of minutes to complete, therefore give it a minute or two
 
 ```bash
 aws cloudformation describe-stacks \
-    --stack-name aws-sam-ocr-pipeline-pipeline \
+    --stack-name ocr-pipeline-stack \
     --query 'Stacks[].Outputs'
 ```
 
